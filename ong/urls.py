@@ -4,5 +4,5 @@ from . import views
 urlpatterns = patterns('',
     url(r'^$', views.home, name='home'),
     url(r'^actions/$', views.get_actions, name='actions'),
-    url(r'^actions/(?P<title>\w+)$', views.get_actions_by_title),
+    url(r'^actions/title/(?P<title>\w+)$', views.get_actions_by_title),
 )
