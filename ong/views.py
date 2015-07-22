@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.core import serializers 
 
-from ong.models import actions
+from ong.models import action
 
 # Create your views here.
 
@@ -13,7 +13,7 @@ def home(request):
     return HttpResponse(template.render())
 
 def get_actions(request):
-    actions = actions.objects.all()
+    actions = action.objects.all()
     data = serializers.serialize('json', actions)
     return JsonResponse(data)
     
