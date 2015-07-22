@@ -17,7 +17,10 @@ def get_actions(request):
     data = serializers.serialize('json', actions)
     return JsonResponse(data, safe=False)
     
-    
+def get_actions_by_title(request, title):
+    actions = action.objects.filter(titre=title)
+    data = serializers.serialize('json', actions)
+    return JsonResponse(data, safe=False)    
 
 #def home(request):
 #    return redirect('http://cartong.github.io/mada-front/dist/atlas/index.html', permanent=True)
