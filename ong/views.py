@@ -1,9 +1,10 @@
 #from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
-#from django.core import serializers 
 
 from ong.models import action
+
+import json
 
 # Create your views here.
 
@@ -14,8 +15,8 @@ def home(request):
 
 def get_actions(request):
     actions = action.objects.all()
-#    data = serializers.serialize('json', actions)
-    return JsonResponse(actions)
+    data = json.dumps(actions)
+    return JsonResponse(data, safe=False)
     
     
 
