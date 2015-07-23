@@ -2,7 +2,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.core import serializers
-from django.core.serializers import serialize
+#from django.core.serializers import serialize
 
 from ong.models import action
 # !! les noms des class models devraient commencer par une Majuscule !!
@@ -28,7 +28,7 @@ def get_actions_by_title(request, title):
 
 def get_geoactions(request):
     actions = action.objects.all()
-    data = serialize('geojson', actions , fields = ( 'titre' , 'description' , 'organisme' , 'categories' , 'duree', 'localisation', 'illustration', 'responsable', 'avancement',))
+    data = serializers.serialize('geojson', actions , fields = ( 'titre' , 'description' , 'organisme' , 'categories' , 'duree', 'localisation', 'illustration', 'responsable', 'avancement',))
     return JsonResponse(data, safe=False)
 
 #def api_action(request, id):
