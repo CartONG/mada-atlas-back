@@ -34,7 +34,6 @@ def api_action(request, id):
         action = Action.objects.get(pk=id)
         data = serialize('json', action)
     return JsonResponse(data)
-      
     elif request.method == 'POST':
         action = Action.objects.get(pk=id)
         action.title = request.post.title
