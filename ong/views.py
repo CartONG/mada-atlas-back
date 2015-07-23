@@ -2,6 +2,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.core import serializers
+from django.core.serializers import serialize
 
 from ong.models import action
 # !! les noms des class models devraient commencer par une Majuscule !!
@@ -25,7 +26,7 @@ def get_actions_by_title(request, title):
 
 def get_geoactions(request):
     actions = action.objects.all()
-    data = serializers.serialize('geojson', actions, geometry_field = 'geom' , fields = ( 'titre' , 'description' , 'organisme' , 'categories' ,))
+    data = serialize('geojson', actions, geometry_field = 'geom' , fields = ( 'titre' , 'description' , 'organisme' , 'categories' ,))
     return JsonResponse(data, safe=False)
 #def home(request):
 #    return redirect('http://cartong.github.io/mada-front/dist/atlas/index.html', permanent=True)
