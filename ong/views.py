@@ -19,7 +19,7 @@ def home(request):
 def get_actions(request):
     actions = action.objects.all()
     data = serializers.serialize('json', actions)
-    return JsonResponse(data, safe=False)
+    return HttpResponse(data)
     
 def get_actions_by_title(request, title):
     actions = action.objects.filter(titre=title)
