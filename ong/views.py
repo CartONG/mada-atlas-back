@@ -27,6 +27,18 @@ def get_actions_by_title(request, title):
 def get_geoactions(request):
     actions = action.objects.all()
     serialize('geojson', actions , geometry_field = 'geom' , fields = ( 'titre' , 'description' , 'organisme' , 'categories' ,))
-    
+
+def api_action(request, id):
+    if request.method == 'GET':
+        action = Action.objects.get(pk=id)
+        data = serialize('json', action)
+    return JsonResponse(data)
+      
+    elif request.method == 'POST':
+        action = Action.objects.get(pk=id)
+        action.title = request.post.title
+        action.description = request.post.description
+        action.save()
+    return JsonReponse('OK')    
 #def home(request):
 #    return redirect('http://cartong.github.io/mada-front/dist/atlas/index.html', permanent=True)
