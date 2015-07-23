@@ -24,12 +24,12 @@ def get_actions(request):
 def get_actions_by_title(request, title):
     actions = action.objects.filter(titre=title)
     data = serializers.serialize('json', actions)
-    return JsonResponse(data, safe=False)    
+    return HttpResponse(data)    
 
 def get_geoactions(request):
     actions = action.objects.all()
     data = serializers.serialize('geojson', actions , fields = ( 'titre' , 'description' , 'organisme' , 'categories' , 'duree', 'localisation', 'illustration', 'responsable', 'avancement',))
-    return JsonResponse(data, safe=False)
+    return HttpResponse(data)
 
 #def api_action(request, id):
 #    if request.method == 'GET':
