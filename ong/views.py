@@ -4,6 +4,7 @@ from django.template import RequestContext, loader
 from django.core import serializers
 
 from ong.models import action
+# !! les noms des class models devraient commencer par une Majuscule !!
 
 # Create your views here.
 
@@ -22,5 +23,9 @@ def get_actions_by_title(request, title):
     data = serializers.serialize('json', actions)
     return JsonResponse(data, safe=False)    
 
+def get_geoactions(request):
+    actions = action.objects.all()
+    data = serializers.serialize('geojson', actions, geometry_field = 'geom' , fields = ( 'titre' , 'description' , 'organisme' , 'categories' ,))
+    return JsonResponse(data, safe=False)
 #def home(request):
 #    return redirect('http://cartong.github.io/mada-front/dist/atlas/index.html', permanent=True)
