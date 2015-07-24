@@ -31,14 +31,14 @@ def get_geoactions(request):
     data = serializers.serialize('geojson', actions, srid='3857', fields = ( 'titre' , 'description' , 'organisme' , 'categories' , 'duree', 'localisation', 'illustration', 'responsable', 'avancement', 'geom',))
     return HttpResponse(data)
 
-#def api_action(request, id):
-#    if request.method == 'GET':
-#        action = Action.objects.get(pk=id)
-#        data = serialize('json', action)
-#    return JsonResponse(data)
-#    elif request.method == 'POST':
-#        action = Action.objects.get(pk=id)
-#        action.title = request.post.title
-#        action.description = request.post.description
-#        action.save()
-#    return JsonReponse('OK')    
+def api_action(request, id):
+    if request.method == 'GET':
+        action = Action.objects.get(pk=id)
+        data = serialize('json', action)
+        return JsonResponse(data)
+    elif request.method == 'POST':
+        action = Action.objects.get(pk=id)
+        action.title = request.post.title
+        action.description = request.post.description
+        action.save()
+        return JsonReponse('OK')    
