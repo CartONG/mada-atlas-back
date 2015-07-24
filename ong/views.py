@@ -28,7 +28,7 @@ def get_actions_by_title(request, title):
 
 def get_geoactions(request):
     actions = action.objects.all()
-    data = serializers.serialize('geojson', actions, srid='3857', fields = ( 'titre' , 'description' , 'organisme' , 'categories' , 'duree', 'localisation', 'illustration', 'responsable', 'avancement', 'geom',))
+    data = serializers.serialize('geojson', actions, srid='4326', fields = ( 'titre' , 'description' , 'organisme' , 'categories' , 'duree', 'localisation', 'illustration', 'responsable', 'avancement', 'geom',))
     return HttpResponse(data)
 
 def api_action(request, id):
