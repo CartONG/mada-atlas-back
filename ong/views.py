@@ -1,5 +1,5 @@
 #from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.core import serializers
 #from django.core.serializers import serialize
@@ -33,12 +33,12 @@ def get_geoactions(request):
 
 def api_action(request, id):
     if request.method == 'GET':
-        action = Action.objects.get(pk=id)
-        data = serialize('json', action)
-        return JsonResponse(data)
+        action = action.objects.get(pk=id)
+        data = serializers.serialize('geojson', action)
+        return HttpResponse(data)
     elif request.method == 'POST':
-        action = Action.objects.get(pk=id)
+        action = action.objects.get(pk=id)
         action.title = request.post.title
         action.description = request.post.description
         action.save()
-        return JsonReponse('OK')    
+        return HttpResponse('OK')    
