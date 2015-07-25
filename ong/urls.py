@@ -4,7 +4,6 @@ from django.conf.urls import patterns, include, url
 from . import views
 
 ## DEBUG MODE ##
-from django.conf import settings
 from django.contrib.staticfiles import views
 ################
 
