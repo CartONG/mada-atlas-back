@@ -1,4 +1,5 @@
 /*eslint-globals L*/
+{% load staticfiles %}
 
 (function () {
 
@@ -125,7 +126,7 @@
             updateFilters();
         });
 
-        $.ajax("{% static "json/faritra.json" %}").done( geojson ) {
+        $.getJSON("{% static "json/faritra.json" %}", function(geojson) {
             regionsGeoJson = geojson;
             regionsShapes = L.geoJson(geojson, {
                 onEachFeature: function(feature, layer) {
@@ -140,7 +141,7 @@
             });
 
             initRegionsListEvents();
-        } ;
+        } );
     }
 
     init();
