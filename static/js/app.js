@@ -92,7 +92,7 @@
 
         L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(map);
 
-        $.get("{% static "json/testData.json" %}").done( renderMarkers );
+        $.ajax("{% url geoactions %}").done( renderMarkers );
 
         popupTpl = _.template( $('.js-tpl-popup').html() );
 
