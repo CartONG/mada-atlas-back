@@ -125,7 +125,7 @@
             updateFilters();
         });
 
-        $.getJSON("{% static "json/faritra.json" %}", function(geojson) {
+        $.ajax("{% static "json/faritra.json" %}").done( geojson ) {
             regionsGeoJson = geojson;
             regionsShapes = L.geoJson(geojson, {
                 onEachFeature: function(feature, layer) {
@@ -140,7 +140,7 @@
             });
 
             initRegionsListEvents();
-        } );
+        } ;
     }
 
     init();
