@@ -3,9 +3,17 @@
 from django.conf.urls import patterns, include, url
 from . import views
 
+## DEBUG MODE ##
+from django.conf import settings
+from django.contrib.staticfiles import views
+################
+
 urlpatterns = patterns('',
     url(r'^$', views.home, name='home'),
     url(r'^actions/$', views.get_actions, name='actions'),
     url(r'^actions/title/(?P<title>[\w\ ]+)$', views.get_actions_by_title),
     url(r'^geoactions/$', views.get_geoactions, name='geoactions'),
+##DEBUG MODE ##
+    url(r'^static/(?P<path>.*)$', views.serve),
+###############
 )
