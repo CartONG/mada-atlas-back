@@ -46,6 +46,6 @@ def api_action(request, id):
         return HttpResponse('OK')    
 
 def get_faritra(request):
-    file = open(djangoSettings.STATIC_ROOT+'/json/faritra.json','r')
+    file = open(djangoSettings.STATIC_ROOT+'json/faritra.json','r')
     faritra = serializers.serialize('json', file)
     return HttpResponse(faritra)
