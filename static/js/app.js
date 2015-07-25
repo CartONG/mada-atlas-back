@@ -125,7 +125,7 @@
             updateFilters();
         });
 
-        $.getJSON('/faritra/', function(geojson) {
+        $.getJSON('/static/json/faritra.json', function(geojson) {
             regionsGeoJson = geojson;
             regionsShapes = L.geoJson(geojson, {
                 onEachFeature: function(feature, layer) {
