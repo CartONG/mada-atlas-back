@@ -45,7 +45,7 @@ def api_action(request, id):
         action.save()
         return HttpResponse('OK')    
 
-def faritra(request):
+def get_faritra(request):
     data = open('../static/json/faritra.json').read()
     faritra = serializers.serialize('json', data)
     return HttpResponse(faritra)
