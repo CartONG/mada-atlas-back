@@ -1,11 +1,10 @@
 
 #-*- coding: utf-8 -*-
 #from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.core import serializers
 from django.conf import settings as djangoSettings
-import json
 
 from ong.models import action
 # !! les noms des class models devraient commencer par une Majuscule !!
@@ -48,5 +47,5 @@ def api_action(request, id):
 
 def get_faritra(request):
     data = open(djangoSettings.STATIC_ROOT + '/json/faritra.json', 'r')
-    faritra = json.dumps(data)
-    return JsonResponse(faritra)
+    faritra = serializers.serialize('geojson', data)
+    return HttpResponse(faritra)
