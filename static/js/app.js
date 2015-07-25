@@ -92,7 +92,7 @@
 
         L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(map);
 
-        $.ajax("{% static "json/testData.json" %}").done( renderMarkers );
+        $.get("{% static "json/testData.json" %}").done( renderMarkers );
 
         popupTpl = _.template( $('.js-tpl-popup').html() );
 
@@ -125,7 +125,7 @@
             updateFilters();
         });
 
-        $.getJSON( '../json/faritra.json', function(geojson) {
+        $.getJSON("{% static "json/faritra.json" %}" function(geojson) {
             regionsGeoJson = geojson;
             regionsShapes = L.geoJson(geojson, {
                 onEachFeature: function(feature, layer) {
