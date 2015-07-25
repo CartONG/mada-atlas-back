@@ -8,7 +8,4 @@ urlpatterns = patterns('',
     url(r'^actions/$', views.get_actions, name='actions'),
     url(r'^actions/title/(?P<title>[\w\ ]+)$', views.get_actions_by_title),
     url(r'^geoactions/$', views.get_geoactions, name='geoactions'),
-##DEBUG MODE ##
-    url(r'^static/(?P<path>.*)$', views.serve),
-###############
 )
