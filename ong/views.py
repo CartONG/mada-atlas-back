@@ -1,7 +1,7 @@
 
 #-*- coding: utf-8 -*-
 #from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.core import serializers
 from django.conf import settings as djangoSettings
@@ -47,5 +47,5 @@ def api_action(request, id):
 
 def get_faritra(request):
     data = open(djangoSettings.STATIC_ROOT + '/json/faritra.json', 'r')
-    faritra = serializers.serialize('json', data)
-    return HttpResponse(faritra)
+    faritra = json.dumps(data)
+    return JsonResponse(faritra)
