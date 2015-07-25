@@ -4,7 +4,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.core import serializers
-#from django.core.serializers import serialize
+from django.conf import settings as djangoSettings
 
 from ong.models import action
 # !! les noms des class models devraient commencer par une Majuscule !!
@@ -46,6 +46,6 @@ def api_action(request, id):
         return HttpResponse('OK')    
 
 def get_faritra(request):
-    data = open('/static/json/faritra.json').read()
-    faritra = serializers.serialize('json', data)
+    file = open(djangoSettings.STATIC_ROOT+'/json/faritra.json','r')
+    faritra = serializers.serialize('json', file)
     return HttpResponse(faritra)
