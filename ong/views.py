@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.core import serializers
 from django.conf import settings as djangoSettings
+import json
 
 from ong.models import action
 # !! les noms des class models devraient commencer par une Majuscule !!
