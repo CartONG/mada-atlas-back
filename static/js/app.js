@@ -1,5 +1,4 @@
 /*eslint-globals L*/
-{% load staticfiles %}
 
 (function () {
 
