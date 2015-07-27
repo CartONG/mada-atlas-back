@@ -117,8 +117,8 @@ class action(models.Model):
 
 class avancement(models.Model):
     AVANCEMENT = (
-        (u'en attente', u'En attente'),
-        (u'en_cours', u'En cours'),
+        (u'En attente', u'En attente'),
+        (u'En cours', u'En cours'),
         (u'Terminé', u'Terminé'),
     )
 
