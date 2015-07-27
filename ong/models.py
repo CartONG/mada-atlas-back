@@ -118,8 +118,7 @@ class action(models.Model):
 class avancement(models.Model):
     AVANCEMENT = (
         (u'en attente', u'En attente'),
-        (u'initié', u'Initié'),
-        (u'à mi parcours', u'A mi parcours'),
+        (u'en_cours', u'En cours'),
         (u'Terminé', u'Terminé'),
     )
 
