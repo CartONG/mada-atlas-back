@@ -93,7 +93,6 @@ class action(models.Model):
         verbose_name = "action"
         verbose_name_plural = "actions"
         ordering = ['-creation']
-        unique_together = ('organisme', 'avancement',)
         
     def __unicode__(self):
         return u"Action: %s" % self.titre
