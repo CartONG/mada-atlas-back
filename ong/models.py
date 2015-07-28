@@ -107,7 +107,6 @@ class action(models.Model):
             self.creation = now()
         self.maj = now()
         super(action, self).save(*args, **kwargs)
-s
 
     # Controle de l'ancienneté de la fiche
     #def control_obsolescence(self):
