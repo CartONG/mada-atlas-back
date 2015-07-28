@@ -79,10 +79,10 @@ class action(models.Model):
     description = models.TextField(null=True)
     localisation = models.CharField(max_length=50)
     illustration = models.ImageField(upload_to="static/media/illustration/%Y/%m", blank=True, null=True)
-    responsable = models.ForeignKey(utilisateur, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche")
-    organisme = models.ForeignKey(organisme, verbose_name="organisme maitre d'oeuvre")
-    avancement = models.ForeignKey('avancement', verbose_name="état d'avancement") # Un "avancement" peut concerner plrs "actions" mais une "action" ne peut avoir qu'un état d'"avancement" => ForeignKey
-    categories = models.ManyToManyField('categorie', verbose_name="catégorie") # Un ou plrs "catégories" peut qualifier une "action" et une "action" peut agir dans un ou plrs "catégories"  => ManyToManyField
+    responsable = models.ForeignKey(utilisateur, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche", to_field='user')
+    organisme = models.ForeignKey(organisme, verbose_name="organisme maitre d'oeuvre", to_field='nom')
+    avancement = models.ForeignKey('avancement', verbose_name="état d'avancement", to_field='nom') # Un "avancement" peut concerner plrs "actions" mais une "action" ne peut avoir qu'un état d'"avancement" => ForeignKey
+    categories = models.ManyToManyField('categorie', verbose_name="catégorie", to_field='nom') # Un ou plrs "catégories" peut qualifier une "action" et une "action" peut agir dans un ou plrs "catégories"  => ManyToManyField
     creation = models.DateTimeField("Date de création fiche", auto_now_add=True)
     maj = models.DateTimeField("Date de mise à jour fiche", auto_now_add=True)
     geom = gismodels.PointField(srid=3857,default='SRID=3857;POINT(0.0 0.0)')
@@ -107,7 +107,7 @@ class action(models.Model):
             self.creation = now()
         self.maj = now()
         super(action, self).save(*args, **kwargs)
-
+s
 
     # Controle de l'ancienneté de la fiche
     #def control_obsolescence(self):
