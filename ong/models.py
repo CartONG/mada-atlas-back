@@ -80,8 +80,8 @@ class action(models.Model):
     localisation = models.CharField(max_length=50)
     illustration = models.ImageField(upload_to="static/media/illustration/%Y/%m", blank=True, null=True)
     responsable = models.ForeignKey(utilisateur, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche", to_field='user')
-    organisme = models.ForeignKey(organisme, verbose_name="organisme maitre d'oeuvre", to_field='nom')
-    avancement = models.ForeignKey('avancement', verbose_name="état d'avancement", to_field='nom') # Un "avancement" peut concerner plrs "actions" mais une "action" ne peut avoir qu'un état d'"avancement" => ForeignKey
+    organisme = models.ForeignKey(organisme, unique=True, verbose_name="organisme maitre d'oeuvre", to_field='nom')
+    avancement = models.ForeignKey('avancement', unique=True, verbose_name="état d'avancement", to_field='nom') # Un "avancement" peut concerner plrs "actions" mais une "action" ne peut avoir qu'un état d'"avancement" => ForeignKey
     categories = models.ManyToManyField('categorie', verbose_name="catégorie") # Un ou plrs "catégories" peut qualifier une "action" et une "action" peut agir dans un ou plrs "catégories"  => ManyToManyField
     creation = models.DateTimeField("Date de création fiche", auto_now_add=True)
     maj = models.DateTimeField("Date de mise à jour fiche", auto_now_add=True)
