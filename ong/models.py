@@ -143,7 +143,7 @@ class categorie(models.Model):
 	(u'Micro-crédit', u'Micro-Crédit'),
     )
 
-    nom = models.CharField(max_length=40, choices=CATEGORIE)
+    nom = models.CharField(max_length=40, choices=CATEGORIE, primary_key=True)
 
     class Meta:
         verbose_name_plural = "Categories"
