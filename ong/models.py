@@ -53,7 +53,7 @@ class status(models.Model):
 
    
 class utilisateur(models.Model):
-    user = models.OneToOneField(User) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
+    user = models.OneToOneField(User, to_field='username') # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
     photo = models.ImageField(upload_to="static/media/photos/%Y/%m", blank=True, null=True)
     organisme = models.ForeignKey(organisme) # Va servir plus tard de groupe pour inclure les "users"
     is_responsable = models.BooleanField("Responsable autorisé à éditer la fiche", default=False)
@@ -79,7 +79,7 @@ class action(models.Model):
     description = models.TextField(null=True)
     localisation = models.CharField(max_length=50)
     illustration = models.ImageField(upload_to="static/media/illustration/%Y/%m", blank=True, null=True)
-    responsable = models.OneToOneField(utilisateur, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche", to_field='username.user')
+    responsable = models.OneToOneField(User, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche")
     organisme = models.OneToOneField(organisme, verbose_name="organisme maitre d'oeuvre", to_field='nom')
     avancement = models.OneToOneField('avancement', verbose_name="état d'avancement", to_field='nom') 
     categories = models.ManyToManyField('categorie', verbose_name="catégorie") # Une ou plrs "catégories" peut qualifier une "action" et une "action" peut agir dans un ou plrs "catégories"  => ManyToManyField
