@@ -75,7 +75,7 @@ class utilisateur(models.Model):
 class action(models.Model):
     titre = models.CharField(max_length = 100)
     date = models.DateField("Date de démarrage", auto_now_add=False, auto_now=False)
-    duree = models.CharField(max_length=40)
+    duree = models.CharField(max_length=40, blank=True, null=True)
     description = models.TextField(null=True)
     localisation = models.CharField(max_length=50)
     illustration = models.ImageField(upload_to="static/media/illustration/%Y/%m", blank=True, null=True)
