@@ -79,7 +79,7 @@ class action(models.Model):
     description = models.TextField(null=True)
     localisation = models.CharField(max_length=50)
     illustration = models.ImageField(upload_to="static/media/illustration/%Y/%m", blank=True, null=True)
-    responsable = models.OneToOneField(User, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche")
+    responsable = models.OneToOneField(utilisateur, limit_choices_to={'is_responsable': True}, verbose_name="nom du responsable de la fiche")
     organisme = models.OneToOneField(organisme, verbose_name="organisme maitre d'oeuvre", to_field='nom')
     avancement = models.OneToOneField('avancement', verbose_name="état d'avancement", to_field='nom') 
     categories = models.ManyToManyField('categorie', verbose_name="catégorie") # Une ou plrs "catégories" peut qualifier une "action" et une "action" peut agir dans un ou plrs "catégories"  => ManyToManyField
