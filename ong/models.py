@@ -39,9 +39,9 @@ class organisme(models.Model):
 
 class status(models.Model):
     STATUS = (
-        (u'ong', u'ONG'),
-        (u'bailleur', u'Bailleur'),
-        (u'organisation', u'Organisation'),
+    	(u'Partenaire sur une action', u'Partenaire'),
+        (u'Bailleur', u'Bailleur'),
+        (u'Organisme maître d'oeuvre', u'Organisme'),
     )
     nom = models.CharField(max_length=40, choices=STATUS)
     
@@ -131,16 +131,16 @@ class avancement(models.Model):
 
 class categorie(models.Model):
     CATEGORIE = (
-        (u'environnement', u'Environnement'),
-        (u'tourisme', u'Tourisme'),
-        (u'développement rural', u'Développement rural'),
-        (u'eau/assainissement', u'Eau/Assainissement'),
-        (u'santé', u'Santé'),
-        (u'éducation', u'Éducation'),
-        (u'justice', u'Justice'),
-	(u'formation conseil', u'Formation Conseil'),
-	(u'protection sociale', u'Protection Sociale'),
-	(u'micro-crédit', u'Micro-Crédit'),
+        (u'Environnement', u'Environnement'),
+        (u'Tourisme', u'Tourisme'),
+        (u'Développement rural', u'Développement rural'),
+        (u'Eau, assainissement et hygiène', u'Eau, assainissement et hygiène'),
+        (u'Santé', u'Santé'),
+        (u'Éducation', u'Éducation'),
+        (u'Droits de l'Homme', u'Droits de l'Homme'),
+	(u'Développement économique', u'Développement économique'),
+	(u'Protection sociale', u'Protection Sociale'),
+	(u'Micro-crédit', u'Micro-Crédit'),
     )
 
     nom = models.CharField(max_length=40, choices=CATEGORIE)
