@@ -10,7 +10,7 @@ from django.utils.timezone import now
 """
 
 class organisme(models.Model):
-    nom = models.CharField(max_length=40)
+    nom = models.CharField(max_length=40, unique=True)
     description = models.TextField(null=True)
     logo = models.ImageField(upload_to="static/media/logo/%Y/%m", blank=True, null=True)
     status = models.ForeignKey('status', verbose_name="status") # Un "status" peut qualifier plrs "organisme" et un "organisme" ne peut avoir qu'un statut"  => Pas OneToOneField ni "OneToManyField" qui n'existe pas en Django mais ForeignKey## la class status n'est pas encore défini, j'utilise donc le nom du modeleÃ  la place de l'objet model lui-mÃme
@@ -121,7 +121,7 @@ class avancement(models.Model):
         (u'Terminé', u'Terminé'),
     )
 
-    nom = models.CharField(max_length=40, choices=AVANCEMENT)
+    nom = models.CharField(max_length=40, choices=AVANCEMENT, unique=True)
 
     class Meta:
         verbose_name_plural = "Avancements"
