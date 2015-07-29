@@ -41,7 +41,7 @@ class status(models.Model):
     STATUS = (
     	(u'Partenaire sur une action', u'Partenaire'),
         (u'Bailleur', u'Bailleur'),
-        (u'Organisme maître d'oeuvre', u'Organisme'),
+        (u'''Organisme maître d'oeuvre''', u'Organisme'),
     )
     nom = models.CharField(max_length=40, choices=STATUS)
     
@@ -137,7 +137,7 @@ class categorie(models.Model):
         (u'Eau, assainissement et hygiène', u'Eau, assainissement et hygiène'),
         (u'Santé', u'Santé'),
         (u'Éducation', u'Éducation'),
-        (u'Droits de l'Homme', u'Droits de l'Homme'),
+        (u'''Droits de l'Homme''', u'''Droits de l'Homme'''),
 	(u'Développement économique', u'Développement économique'),
 	(u'Protection sociale', u'Protection Sociale'),
 	(u'Micro-crédit', u'Micro-Crédit'),
