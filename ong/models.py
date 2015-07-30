@@ -1,7 +1,7 @@
 ﻿#-*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.gis.db import models as gismodels
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 """
@@ -52,9 +52,8 @@ class status(models.Model):
         return u"Status: %s" % self.nom
 
    
-class utilisateur(AbstractBaseUser):
-    user = models.CharField(max_length=40, unique=True, set_password(temp)) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
-    USERNAME_FIELD = 'user'
+class utilisateur(models.Model):
+    user = models.OneToOneField(User) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
     photo = models.ImageField(upload_to="static/media/photos/%Y/%m", blank=True, null=True)
     organisme = models.ForeignKey(organisme) # Va servir plus tard de groupe pour inclure les "users"
     is_responsable = models.BooleanField("Responsable autorisé à éditer la fiche", default=False)
@@ -65,7 +64,7 @@ class utilisateur(AbstractBaseUser):
         ordering = ['user']
 
     def __unicode__(self):
-        return u"User: %s" % self.user
+        return u"User: %s" % self.user.username
 
     def appartenance(self):
         "Returns the organisme and person's full name."
