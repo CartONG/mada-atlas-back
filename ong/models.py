@@ -53,7 +53,7 @@ class status(models.Model):
 
    
 class utilisateur(AbstractBaseUser):
-    user = models.CharField(max_length=40, unique=True, is_authenticated()) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
+    user = models.CharField(max_length=40, unique=True, set_password(temp)) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
     USERNAME_FIELD = 'user'
     photo = models.ImageField(upload_to="static/media/photos/%Y/%m", blank=True, null=True)
     organisme = models.ForeignKey(organisme) # Va servir plus tard de groupe pour inclure les "users"
