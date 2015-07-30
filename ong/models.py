@@ -53,7 +53,8 @@ class status(models.Model):
 
    
 class utilisateur(models.Model):
-    user = models.OneToOneField(User) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
+    user = models.OneToOneField(User, db_column='auth_user_id',
+        primary_key=True, parent_link=True) # La liaison OneToOne vers le modèle User (mail-nom-prenom-password)
     photo = models.ImageField(upload_to="static/media/photos/%Y/%m", blank=True, null=True)
     organisme = models.ForeignKey(organisme) # Va servir plus tard de groupe pour inclure les "users"
     is_responsable = models.BooleanField("Responsable autorisé à éditer la fiche", default=False)
@@ -64,7 +65,7 @@ class utilisateur(models.Model):
         ordering = ['user']
 
     def __unicode__(self):
-        return u"User: %s" % self.user
+        return u"User: %s" % self.user.username
 
     def appartenance(self):
         "Returns the organisme and person's full name."
