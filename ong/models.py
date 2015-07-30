@@ -43,7 +43,7 @@ class status(models.Model):
         (u'Bailleur', u'Bailleur'),
         (u'''Organisme maître d'oeuvre''', u'Organisme'),
     )
-    nom = models.CharField(max_length=40, choices=STATUS)
+    nom = models.CharField(max_length=40, choices=STATUS, unique=True)
     
     class Meta:
         verbose_name_plural = "status"
