@@ -13,7 +13,7 @@ class organisme(models.Model):
     nom = models.CharField(max_length=40, unique=True)
     description = models.TextField(null=True)
     logo = models.ImageField(upload_to="static/media/logo/%Y/%m", blank=True, null=True)
-    status = models.ForeignKey('status', verbose_name="status") # Un "status" peut qualifier plrs "organisme" et un "organisme" ne peut avoir qu'un statut"  => Pas OneToOneField ni "OneToManyField" qui n'existe pas en Django mais ForeignKey## la class status n'est pas encore défini, j'utilise donc le nom du modeleÃ  la place de l'objet model lui-mÃme
+    status = models.ForeignKey('status', verbose_name="status", to_field='nom') # Un "status" peut qualifier plrs "organisme" et un "organisme" ne peut avoir qu'un statut"  => Pas OneToOneField ni "OneToManyField" qui n'existe pas en Django mais ForeignKey## la class status n'est pas encore défini, j'utilise donc le nom du modeleÃ  la place de l'objet model lui-mÃme
     referent = models.ForeignKey('self', blank=True, null=True)
 
     # Ainsi le model est correctement definit dans admin.
