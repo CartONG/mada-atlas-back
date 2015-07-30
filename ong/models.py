@@ -64,7 +64,7 @@ class utilisateur(models.Model):
         ordering = ['user']
 
     def __unicode__(self):
-        return u"User: %s" % self.user.username
+        return u"User: %s" % self.User.username
 
     def appartenance(self):
         "Returns the organisme and person's full name."
