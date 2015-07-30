@@ -64,7 +64,8 @@ class utilisateur(models.Model):
         verbose_name_plural = "utilisateurs"
         ordering = ['user']
 
-
+    def __unicode__(self):
+        return u"User: %s" % self.user
 
     def appartenance(self):
         "Returns the organisme and person's full name."
