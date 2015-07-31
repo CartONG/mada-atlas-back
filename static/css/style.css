@@ -221,3 +221,10 @@ label {
 .leaflet-popup-content {
 	margin: 0;
 }
+
+.popup-truncate {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
