@@ -7,7 +7,9 @@
     var regionsGeoJson;
     var regionsShapes;
 
-    var map, popupTpl, regionsListContainer, regionListItemTpl;
+    var map, popupTpl, modalTpl, regionsListContainer, regionListItemTpl;
+
+    var features = [];
 
     function renderMarkers(data) {
 
@@ -17,31 +19,17 @@
             spiderfyDistanceMultiplier: 2
         });
 
-        _.each(data.data, function (markerData) {
-
-            // lon,lat on test data :(
-            var rawCoordinates = markerData.coordinates.split(',');
-            var coordinates = [ parseFloat(rawCoordinates[1]), parseFloat(rawCoordinates[0]) ];
-
-            var marker = new L.Marker(coordinates);
-            markerClusters.addLayer(marker);
-
-            marker.data = markerData;
-            marker.on('click', onMarkerClick);
-
+        var geoJsonLayer = L.geoJson(data, {
+            onEachFeature: function (feature, layer) {
+                var popupData = feature.properties;
+                var popup = L.popup().setContent( popupTpl( {data: popupData, internalIndex: features.length }) );
+                layer.bindPopup(popup);
+                features.push(feature);
+            }
         });
-
+        markerClusters.addLayer(geoJsonLayer);
+        
         map.addLayer(markerClusters);
-    }
-
-    function onMarkerClick(e) {
-        var marker = e.target;
-        var popupData = marker.data;
-
-        //wrap data in an object to avoid ref errors when rendering template
-        var popup = L.popup().setContent( popupTpl( {data: popupData }) );
-        marker.bindPopup( popup );
-        marker.openPopup();
     }
 
     function initRegionsListEvents() {
@@ -77,7 +65,14 @@
         }
         updateCheckboxList('actionType');
         updateCheckboxList('population');
+    }
 
+    function openModal(link) {
+        var index = $(link).parents('.js-popup').data().index;
+        var data = features[index].properties;
+        var modalDom = modalTpl({data: data});
+
+        $(modalDom).modal();
     }
 
     function init() {
@@ -92,9 +87,11 @@
 
         L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(map);
 
+
         $.ajax('/geoactions/').done( renderMarkers );
 
         popupTpl = _.template( $('.js-tpl-popup').html() );
+        modalTpl = _.template( $('.js-tpl-modal').html() );
 
         regionsListContainer = $('.js-regions');
         regionListItemTpl = _.template('<li><a href="#" data-latlon="<%= center %>"><%= name %></a></li>');
@@ -141,8 +138,17 @@
 
             initRegionsListEvents();
         } );
+
+        $('#map').on('click', '.js-openContentModal', function(e) {
+            e.preventDefault();
+            openModal(e.target);
+        });
+
+
     }
 
     init();
+
+
 
 })();
