@@ -1,0 +1,302 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Atlas Solidarité Madagascar - {% block title %}{% endblock %}</title>
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/vendor/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/vendor/bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/vendor/leaflet.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/vendor/MarkerCluster.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/vendor/MarkerCluster.Default.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/fonts/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/atlas.css" %}">
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">activer/désactiver la navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">
+                  <img alt="Atlas Solidarité Madagascar" src="{% static "img/logo_horizontal.svg" %}">
+              </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse navbar-right" aria-expanded="false" style="height: 1px;">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Carte</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#js-about-modal">À propos</a></li>
+                <li><a href="/admin" target="_blank">Connexion</a></li>
+                <li><a href="/"><img alt="Français" src="{% static "img/locale_fr-FR.svg" %}"></a></li>
+                <li><a href="#"><img alt="Malagasy" src="{% static "img/locale_mg-MG.svg" %}"></a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+    </nav><!--/top nav -->
+
+
+    <button id="filters-button" type="button" class="btn btn-warning js-showfilters" aria-hidden="true">
+        Filtrer <span class="glyphicon glyphicon-triangle-top" ></span>
+    </button>
+
+    <div id="filters" class="panel panel--outer js-filters">
+
+        <div class="mobileFilterHeader" aria-hidden="true">
+            Filtres
+            <button class="mobileFilterHeader-close js-closeFilters">
+                Fermer
+                <span class="close">×</span>
+            </button>
+        </div>
+
+
+        <div class="filters-inner">
+
+
+            <div class="panel-group" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel--inner">
+    <div class="panel-heading" role="tab" id="actionTypeHeading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#actionType" aria-expanded="true" aria-controls="actionType"  class="panel-title-inner">
+          Atlas Solidarité Madagascar
+          <span class="panelFilterStatus" data-countof="actionType"></span>
+
+          <span class="panelCollapsedStatus">
+            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+          </span>
+
+        </a>
+      </h4>
+    </div>
+
+
+    <div id="actionType" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="actionTypeHeading">
+      <div class="panel-body checkboxList js-filterFieldList">
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              formation conseil
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              environnement
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              tourisme
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              développement rural
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              eau/assainissement
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              santé
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              éducation
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              justice
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              protection sociale
+            </abbr>
+        </label>
+        
+        <label>
+            <input type="checkbox" checked>
+            <abbr title="">
+              micro-crédit
+            </abbr>
+        </label>
+        
+
+
+      </div>
+    </div>
+</div><!--/actionType panel -->
+
+<div class="panel panel--inner">
+    <div class="panel-heading" role="tab" id="provinceHeading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#province" aria-expanded="true" aria-controls="province" class="panel-title-inner">
+              Zoomer sur une region (<em>faritra</em>)
+              <span class="panelCollapsedStatus">
+                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+              </span>
+            </a>
+          </h4>
+    </div>
+
+     <div id="province" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="provinceHeading">
+        <div class="panel-body">
+            <ul class="js-regions">
+
+            </ul>
+        </div>
+
+    </div>
+</div><!--/province panel -->
+
+
+                <div class="panel panel--inner">
+                    <div class="panel-heading" role="tab">
+                      <h4 class="panel-title">
+
+                            <form class="form-inline panel-title-inner" >
+                              <div class="form-group">
+                                <input type="text" class="form-control" id="search" placeholder="Recherche">
+                              </div>
+
+                              <button type="submit" class="btn btn-default">Rechercher</button>
+                            </form>
+
+                      </h4>
+                    </div>
+                </div>
+                <!--/search panel -->
+
+
+
+            </div>  <!--/.panel-group -->
+        </div>
+    </div><!--/#filters -->
+
+
+    <div id="map"></div>
+
+    <script type="text/template" class="js-tpl-popup">
+    <div class="js-popup" data-index="<%= internalIndex %>">
+
+
+        <div class="popup-title">
+            <%= data.titre %>
+
+            <% if (data.avancement === 1) { %>
+                <span class="label label-default">en attente</span>
+            <% } else if (data.avancement === 2) { %>
+                <span class="label label-warning">initié</span>
+            <% } else if (data.avancement === 3) { %>
+                <span class="label label-warning">à mi parcours</span>
+            <% } else if (data.avancement === 4) { %>
+                <span class="label label-warning">terminé</span>
+            <% } %>
+
+
+       </div>
+        <table class="popup-table table table-striped">
+            <tr>
+                <td>Organisme</td>
+                <td><%= data.organisme %></td>
+            </tr>
+            <tr>
+                <td>Lieux</td>
+                <td><%= data.localisation %></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <div class="popup-truncate"><%= data.description %></div>
+                    <a class="underline js-openContentModal" href="#" target="_blank">...</a>
+                </td>
+            </tr>
+        </table>
+        <div class="popup-link">
+            <a class="underline js-openContentModal" href="#" target="_blank">Détails</a>
+        </div>
+    </div>
+
+</script>
+
+
+    <script type="text/template" class="js-tpl-modal">
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"><%= data.titre %></h4>
+        </div>
+        <div class="modal-body">
+          <%= data.description %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+    <div class="modal fade" id="js-about-modal" tabindex="-1" role="dialog" aria-labelledby="js-about-modal-title">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="js-about-modal-title">À propos de l'Atlas solidarité</h4>
+          </div>
+          <div class="modal-body">
+            À remplir...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="{% static "js/dependencies.js" %}"></script>
+    <!-- TODO: fix hard dependency -->
+    <script src="{% static "js/leaflet.markercluster.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
+</body>
+</html>

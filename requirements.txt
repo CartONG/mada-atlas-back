@@ -1,0 +1,14 @@
+Django>=1.8.3
+Pillow>=2.3.0
+argparse>=1.2.1
+chardet>=2.0.1
+colorama>=0.2.5
+django-cors-headers>=1.1.0
+django-leaflet>=0.16.0
+html5lib>=0.999
+psycopg2>=2.6.1
+requests>=2.2.1
+six>=1.5.2
+urllib3>=1.7.1
+virtualenv>=1.11.4
+wsgiref>=0.1.2
