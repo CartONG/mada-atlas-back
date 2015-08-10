@@ -189,9 +189,10 @@ label {
     height: 30px;
 }
 
-#actionType .checkboxList .icon {
+/* Désactivation des icones onusida/cnls pour l'ASM */
+/*#actionType .checkboxList .icon {
     background-image: url('../img/actionType-sprites.svg');
-}
+}*/
 
 #population .checkboxList .icon {
     background-image: url('../img/population-sprites.svg');
